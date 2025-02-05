@@ -1,0 +1,243 @@
+.table-container {
+    margin-top: 100px;
+    align-self: center;
+    width: 100%;
+    max-width: 95vw;
+    padding: 20px;
+    background-color: #F8F8F8;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
+    border-collapse: collapse;
+    min-width: 100%;
+    table-layout: fixed;
+}
+
+/* Style for both headers and table cells */
+th, td {
+    padding: 12px;
+    text-align: center;
+    min-width: 100px;
+}
+
+/* Header style */
+th {
+    background-color: #4E50A2;
+    color: white;
+}
+
+/* Sticky last column */
+th:last-child, td:last-child {
+    position: sticky;
+    right: 0;
+    background-color: #4E50A2; /* Match the header color */
+    z-index: 1;
+    width: 200px; /* Set a fixed width for the last column */
+}
+
+/* Table cell style */
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+h2 {
+    color: #1a1a1a;
+}
+
+/* Alternating row colors applied to all cells in the row */
+tr:nth-child(even) {
+    background-color: #6B59A4;
+    color: white;
+}
+
+tr:nth-child(odd) {
+    background-color: #794EA0;
+    color: white;
+}
+
+/* Alternating background color for the last column */
+tr:nth-child(even) td:last-child {
+    background-color: #6B59A4;
+    color: white;
+}
+
+tr:nth-child(odd) td:last-child {
+    background-color: #794EA0;
+    color: white;
+}
+
+/* Hover effect on rows */
+tr:hover {
+    background-color: #3F247B;
+    color: white;
+    transition: 0.3s ease-in-out;
+}
+
+/* Search bar styling */
+.search-bar {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 300px;
+    margin: 10px auto;
+    display: block;
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Modal Dialog */
+.modal-dialog {
+    width: 80vw;
+    max-width: 800px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal Content */
+.modal-content {
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.close {
+    border: none;
+    background: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Modal Body */
+.modal-body {
+    padding: 10px 0;
+}
+
+/* Form Row */
+.form-row {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping for better responsiveness */
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Form Column */
+.form-column {
+    flex: 1;
+    max-width: 48%; /* Limit to 48% for 2 columns */
+}
+
+/* Input Group */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    font-weight: bold;
+    color: #1a1a1a;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.input-group input, .input-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Modal Footer */
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+/* Custom Button Styles */
+.modal-button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.modal-button.primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.modal-button.primary:hover {
+    background-color: #0056b3;
+}
+
+.modal-button.secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.modal-button.secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Modal Button Hover Effects */
+.modal-button:hover {
+    opacity: 0.9;
+}

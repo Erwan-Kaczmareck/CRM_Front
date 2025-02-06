@@ -2,10 +2,16 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 import './Tabs.css';
 import ModalAjout from "./ModalAjout.jsx";
+import ModalModification from "./ModalModification.jsx";
+import ModalDetail from './ModalDetail';
 
 function Tabs() {
     const [searchQuery, setSearchQuery] = useState("");
-    const [prospects, setProspects] = useState([]); // Ajouter un état pour les prospects
+    const [prospects, setProspects] = useState([]);
+    const [selectedProspect, setSelectedProspect] = useState(null); // Stocke le prospect sélectionné pour la modification
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+
 
     // Utiliser useEffect pour récupérer les prospects au montage du composant
     const getProspects = () => {
@@ -34,7 +40,33 @@ function Tabs() {
         )
     );
 
-    // Fonction pour ouvrir le modal
+
+    //Supprimer un prospect
+    const handleDelete = (id) => {
+        if (window.confirm("Voulez-vous vraiment supprimer ce prospect ?")) {
+            console.log(id);
+            axios.delete(`http://localhost:8080/api/prospects/${id}`)
+                .then(() => {
+                    getProspects(); // Actualiser la liste après suppression
+                })
+                .catch((error) => {
+                    console.error("Erreur lors de la suppression :", error);
+                });
+        }
+    };
+
+    const handleEdit = (prospect) => {
+        setSelectedProspect(prospect); // Stocker le prospect sélectionné
+        setIsEditModalOpen(true); // Ouvrir le modal
+    };
+
+    // Ouvrir le modal de détails
+
+
+    const handleDetail = (prospect) => {
+        setSelectedProspect(prospect);
+        setIsDetailModalOpen(true);
+    };
 
     return (
         <>
@@ -49,6 +81,24 @@ function Tabs() {
             </div>
 
             <ModalAjout getProspects={getProspects}/>
+
+
+            {/* Modal pour modifier un prospect */}
+            {isEditModalOpen && (
+                <ModalModification
+                    prospect={selectedProspect} // Passer le prospect sélectionné
+                    getProspects={getProspects} // Rafraîchir la liste après modification
+                    onClose={() => setIsEditModalOpen(false)} // Fermer le modal
+                />
+            )}
+
+            {isDetailModalOpen && (
+                <ModalDetail
+                    prospect={selectedProspect}
+                    isOpen={isDetailModalOpen}
+                    closeModal={() => setIsDetailModalOpen(false)}
+                />
+            )}
 
             <div className="table-container">
                 <div className="table-wrapper">
@@ -77,8 +127,8 @@ function Tabs() {
                         </tr>
                         </thead>
                         <tbody>
-                        {filteredRows.map((row, index) => (
-                            <tr key={index}>
+                        {filteredRows.map((row) => (
+                            <tr key={row.idProspect}>
                                 <td>{row.type}</td>
                                 <td>{row.statut?.nomStatut}</td>
                                 <td>{row.origineLead}</td>
@@ -97,7 +147,16 @@ function Tabs() {
                                 <td>{row.anneeRecrutement}</td>
                                 <td>{row.entreProchaineAnnee}</td>
                                 <td>{row.commentaire}</td>
-                                <td></td>
+                                <td>
+                                    <button className="btn-detail" onClick={() => handleDetail(row)}>Détails
+                                    </button>
+
+                                    <button className="btn-edit" onClick={() => handleEdit(row)}>Modifier
+                                    </button>
+                                    <button className="btn-delete"
+                                            onClick={() => handleDelete(row.idProspect)}>Supprimer
+                                    </button>
+                                </td>
                             </tr>
                         ))}
                         </tbody>
